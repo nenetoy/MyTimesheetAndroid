@@ -1,6 +1,6 @@
 workflows:
   android-debug:
-    name: Attendance Tracker Firebase APK
+    name: Attendance Tracker Final APK
     max_build_duration: 60
     environment:
       java: 17
@@ -10,7 +10,7 @@ workflows:
         script: |
           rm -rf _attendance_build
           mkdir -p _attendance_build
-          unzip -q AttendanceTrackerAndroid_v7_FastLoad.zip -d _attendance_build
+          unzip -q AttendanceTrackerAndroid_FINAL_Working.zip -d _attendance_build
 
       - name: Build Android APK
         script: |
