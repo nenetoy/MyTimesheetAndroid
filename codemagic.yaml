@@ -6,15 +6,13 @@ workflows:
       java: 17
 
     scripts:
-      - name: Extract latest Attendance Tracker project
+      - name: Extract Attendance Tracker project
         script: |
           rm -rf _attendance_build
           mkdir -p _attendance_build
-          unzip -q AttendanceTrackerAndroid_v1_final_intro_pec.zip -d _attendance_build
-          echo "Project extracted"
-          ls -la _attendance_build/AttendanceTrackerAndroid
+          unzip -q AttendanceTrackerAndroid_v2_native_splash.zip -d _attendance_build
 
-      - name: Create Gradle wrapper and build APK
+      - name: Build Android APK
         script: |
           cd _attendance_build/AttendanceTrackerAndroid
           gradle wrapper --gradle-version 8.10.2
