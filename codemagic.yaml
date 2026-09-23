@@ -10,7 +10,7 @@ workflows:
         script: |
           rm -rf _attendance_build
           mkdir -p _attendance_build
-          unzip -q AttendanceTrackerAndroid_v1.zip -d _attendance_build
+          unzip -q AttendanceTrackerAndroid_v1_final.zip -d _attendance_build
           echo "Project extracted"
           ls -la _attendance_build/AttendanceTrackerAndroid
 
