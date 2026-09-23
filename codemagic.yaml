@@ -6,15 +6,13 @@ workflows:
     scripts:
       - name: Set Android SDK location
         script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
-
-      - name: Make Gradle executable
-        script: |
-          chmod +x gradlew
+          cd MyTimesheetAndroid
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
       - name: Build APK
         script: |
-          ./gradlew assembleDebug
+          cd MyTimesheetAndroid
+          gradle assembleDebug
 
     artifacts:
-      - app/build/outputs/**/*.apk
+      - MyTimesheetAndroid/app/build/outputs/**/*.apk
