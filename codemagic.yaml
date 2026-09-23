@@ -4,8 +4,68 @@ workflows:
     max_build_duration: 60
 
     scripts:
-      - name: Set Android SDK location
+      - name: Prepare Android project
         script: |
+          mkdir -p app/src/main/java/com/billy/mytimesheet
+          mkdir -p app/src/main/res/layout
+          mkdir -p app/src/main/res/values
+
+          cp MainActivity.java app/src/main/java/com/billy/mytimesheet/MainActivity.java
+          cp AndroidManifest.xml app/src/main/AndroidManifest.xml
+          cp activity_main.xml app/src/main/res/layout/activity_main.xml
+          cp styles.xml app/src/main/res/values/styles.xml
+
+          cat > settings.gradle <<'EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+
+          rootProject.name = "MyTimesheet"
+          include(":app")
+          EOF
+
+          cat > build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application' version '8.7.3' apply false
+          }
+          EOF
+
+          cat > gradle.properties <<'EOF'
+          org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
+          android.useAndroidX=true
+          EOF
+
+          cat > app/build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application'
+          }
+
+          android {
+              namespace 'com.billy.mytimesheet'
+              compileSdk 35
+
+              defaultConfig {
+                  applicationId "com.billy.mytimesheet"
+                  minSdk 26
+                  targetSdk 35
+                  versionCode 1
+                  versionName "1.0"
+              }
+          }
+          EOF
+
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
       - name: Build APK
@@ -13,4 +73,4 @@ workflows:
           gradle assembleDebug
 
     artifacts:
-      - app/build/outputs/**/*.apk
+      - app/build/outputs/apk/debug/*.apk
