@@ -6,13 +6,11 @@ workflows:
     scripts:
       - name: Set Android SDK location
         script: |
-          cd MyTimesheetAndroid
           echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
       - name: Build APK
         script: |
-          cd MyTimesheetAndroid
           gradle assembleDebug
 
     artifacts:
-      - MyTimesheetAndroid/app/build/outputs/**/*.apk
+      - app/build/outputs/**/*.apk
