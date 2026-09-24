@@ -1,6 +1,6 @@
 workflows:
   android-debug:
-    name: Attendance Tracker Final Hours Minutes APK
+    name: Attendance Tracker Cloud Pull Sync APK
     max_build_duration: 60
     environment:
       java: 17
@@ -10,7 +10,7 @@ workflows:
         script: |
           rm -rf _attendance_build
           mkdir -p _attendance_build
-          unzip -q AttendanceTrackerAndroid_FINAL_HoursMinutes_v2.zip -d _attendance_build
+          unzip -q AttendanceTrackerAndroid_v2.3.0_CloudPullSync.zip -d _attendance_build
 
       - name: Build Android APK
         script: |
